@@ -1,0 +1,55 @@
+# Agent 自定义规则
+
+集中管理各个 agent 平台的自定义规则，保留修改历史，并在多台设备间同步。
+
+## 目录
+
+```text
+platforms/
+  codex/
+    AGENTS.md       # 当前 Codex 全局规则
+```
+
+每个平台使用独立目录，保留该平台原生的规则文件名。新增平台时，在 `platforms/<平台名>/` 中添加实际规则，并在对应目录写明安装位置和生效方式。平台间共享的偏好可以按需同步到各自的规则文件。
+
+## 在另一台设备使用 Codex 规则
+
+先克隆仓库：
+
+```sh
+git clone https://github.com/Lidong1793/agent-rules.git
+cd agent-rules
+```
+
+将 `platforms/codex/AGENTS.md` 复制到目标设备的 Codex 全局目录。目标位置已有规则时，先备份并检查需要合并的内容。
+
+- Windows 默认位置：`%USERPROFILE%\.codex\AGENTS.md`
+- macOS / Linux 默认位置：`~/.codex/AGENTS.md`
+- 设置了 `CODEX_HOME` 时：`$CODEX_HOME/AGENTS.md`
+
+同一全局目录中的 `AGENTS.override.md` 优先于 `AGENTS.md`。安装后，新建会话并让 Codex 总结当前全局规则，确认加载结果。
+
+规则中提到的 `astra-double.config.toml` 是独立的可选配置，需要在目标设备另行配置。
+
+官方规则发现说明：https://learn.chatgpt.com/docs/agent-configuration/agents-md
+
+## 更新规则
+
+1. 修改前运行 `git pull --ff-only`，获取其他设备提交的最新版本。
+2. 编辑仓库中对应平台的规则文件；如果在平台本地修改，先将文件同步回仓库。
+3. 检查差异，再提交并推送：
+
+   ```sh
+   git diff
+   git add platforms/
+   git commit -m "Update agent rules"
+   git push
+   ```
+
+4. 其他设备拉取更新，再将规则文件复制到对应平台的实际加载位置。
+
+Git 同步仓库里的文件。各个平台从自己的规则目录读取文件，因此拉取后需要完成复制步骤。
+
+## 收录范围
+
+仓库收录自定义规则和必要的使用说明。账号凭据、访问令牌、会话记录及机器专属配置保存在设备本地。

@@ -1,0 +1,15 @@
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+auth.json
+credentials.json
+*.pem
+*.key
+
+# Machine-specific files and backups
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*.local
