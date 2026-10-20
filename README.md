@@ -31,8 +31,6 @@ cd agent-rules
 
 同一全局目录中的 `AGENTS.override.md` 优先于 `AGENTS.md`。安装后，新建会话并让 Codex 总结当前全局规则，确认加载结果。
 
-规则中提到的 `astra-double.config.toml` 是独立的可选配置，需要在目标设备另行配置。
-
 官方规则发现说明：https://learn.chatgpt.com/docs/agent-configuration/agents-md
 
 ## 更新规则
