@@ -2,7 +2,7 @@
 
 集中管理各个 agent 平台的自定义规则，保留修改历史，并在多台设备间同步。
 
-朋友可以直接读取和克隆这个公开仓库。让朋友的 AI 安装或更新 Codex 全局规则时，复制[给 AI 的同步指令](docs/codex-sync.md)中的提示词即可。
+朋友可以直接读取和克隆这个公开仓库。让朋友的 AI 安装或更新全局规则时，复制对应平台的同步指令中的提示词即可：[Codex](docs/codex-sync.md)、[Claude Code](docs/claude-sync.md)。
 
 ## 目录
 
@@ -10,6 +10,8 @@
 platforms/
   codex/
     AGENTS.md       # 当前 Codex 全局规则
+  claude/
+    CLAUDE.md       # 当前 Claude Code 全局规则
 ```
 
 每个平台使用独立目录，保留该平台原生的规则文件名。新增平台时，在 `platforms/<平台名>/` 中添加实际规则，并在对应目录写明安装位置和生效方式。平台间共享的偏好可以按需同步到各自的规则文件。
@@ -32,6 +34,16 @@ cd agent-rules
 同一全局目录中的 `AGENTS.override.md` 优先于 `AGENTS.md`。安装后，新建会话并让 Codex 总结当前全局规则，确认加载结果。
 
 官方规则发现说明：https://learn.chatgpt.com/docs/agent-configuration/agents-md
+
+## 在另一台设备使用 Claude Code 规则
+
+克隆仓库后，将 `platforms/claude/CLAUDE.md` 复制到目标设备的 Claude Code 全局目录。目标位置已有规则时，先备份并检查需要合并的内容。
+
+- Windows 默认位置：`%USERPROFILE%\.claude\CLAUDE.md`
+- macOS / Linux 默认位置：`~/.claude/CLAUDE.md`
+- 设置了 `CLAUDE_CONFIG_DIR` 时：`$CLAUDE_CONFIG_DIR/CLAUDE.md`
+
+安装后，新建会话并让 Claude 总结当前全局规则，确认加载结果。让 AI 自动安装时，使用[给 AI 的同步指令](docs/claude-sync.md)。
 
 ## 更新规则
 
