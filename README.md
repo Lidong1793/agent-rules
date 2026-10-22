@@ -10,6 +10,8 @@
 platforms/
   codex/
     AGENTS.md       # 当前 Codex 全局规则
+    skills/
+      frontend-no-subtitles/  # 按需使用的前端文案精简技能
   claude/
     CLAUDE.md       # 当前 Claude Code 全局规则
 ```
@@ -34,6 +36,22 @@ cd agent-rules
 同一全局目录中的 `AGENTS.override.md` 优先于 `AGENTS.md`。安装后，新建会话并让 Codex 总结当前全局规则，确认加载结果。
 
 官方规则发现说明：https://learn.chatgpt.com/docs/agent-configuration/agents-md
+
+## 按需使用 Codex 技能
+
+将 `platforms/codex/skills/frontend-no-subtitles/` 整个目录复制到 Codex 的 `skills/` 目录：
+
+- Windows：`%USERPROFILE%\.codex\skills\frontend-no-subtitles\`
+- macOS / Linux：`~/.codex/skills/frontend-no-subtitles/`
+- 设置了 `CODEX_HOME` 时：`$CODEX_HOME/skills/frontend-no-subtitles/`
+
+[frontend-no-subtitles](platforms/codex/skills/frontend-no-subtitles/SKILL.md) 用于按需清理副标题和装饰性文案，保留必要提示、状态和现有功能。它在请求精简界面文案或无副标题设计时适用。
+
+调用示例：
+
+```text
+使用 $frontend-no-subtitles 清理当前页面的副标题和冗余文案。
+```
 
 ## 在另一台设备使用 Claude Code 规则
 
